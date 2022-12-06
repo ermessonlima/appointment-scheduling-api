@@ -10,7 +10,7 @@ app.use(express_1.default.json());
 app.get('/', (req, res) => {
     return res.json({ message: 'Hello World' });
 });
-app.get('/registerPost', routes_1.registerPost);
+app.get('/createManager', routes_1.createManager);
 app.listen(3333, () => {
     console.log('Server started on port 3333!');
 });

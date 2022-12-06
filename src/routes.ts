@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
-import RegisterPost from "./RegisterPost";
 
+import CreateManager from "./CreateManager";
 
-export function registerPost(req: Request, res:Response) {
-    RegisterPost.execute("Ermesson", "ermesson@hotmail.com", "active");
+export function createManager(req: Request, res: Response) {
+    CreateManager.execute({
+        name: "Ermesson",
+        cpf: "cpf",
+        email: "ermesson@hotmail.com",
+        phone: "phone",
+    });
 }
