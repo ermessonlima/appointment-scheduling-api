@@ -1,11 +1,22 @@
-import { Manager } from "../model/Manager";
-import { IManagerCreateDTO } from "./dto/Manager.dto";
+import { Manager } from "../../model/Manager";
+import { IManagerCreateDTO } from "../dto/Manager.dto";
+import { IManagerRepository } from "../IManagerRepository";
 
-class ManagerRepository {
+class ManagerRepository implements IManagerRepository {
     private managers: Manager[] = [];
 
-    constructor() {
+    private static INSTANCE: ManagerRepository;
+
+    private constructor() {
         this.managers = [];
+    }
+
+    public static getInstance(): ManagerRepository {
+        if (!ManagerRepository.INSTANCE) {
+            ManagerRepository.INSTANCE = new ManagerRepository();
+        }
+
+        return ManagerRepository.INSTANCE;
     }
 
     create({ name, cpf, email, phone }: IManagerCreateDTO): Manager {
