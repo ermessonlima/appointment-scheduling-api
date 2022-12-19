@@ -22,6 +22,7 @@
         "prettier"
     ],
     "rules": {
+        "passing-generics-to-types": "off",
         "prettier/prettier": "error",
         "camelcase": "off",
         "import/no-unresolved": "error",

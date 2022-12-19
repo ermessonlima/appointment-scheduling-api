@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { ListUnityUseCase } from "./ListUnityUseCase";
 
 class ListUnityController {
-    constructor(private unityRepository: ListUnityUseCase) {}
-    handle(request: Request, response: Response): Response {
-        const unitys = this.unityRepository.execute();
+    async handle(request: Request, response: Response): Promise<Response> {
+        const unityRepository = container.resolve(ListUnityUseCase);
+        const unitys = await unityRepository.execute();
 
         return response.status(201).json(unitys);
     }

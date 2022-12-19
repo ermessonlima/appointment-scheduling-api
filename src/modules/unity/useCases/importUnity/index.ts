@@ -1,7 +1,11 @@
+import { UnityRepository } from "../../repositories/implementations/UnityRepository";
 import { ImportUnityController } from "./importUnityController";
 import { ImportUnityUseCase } from "./importUnityUseCase";
 
-const importUnityUseCase = new ImportUnityUseCase();
-const importUnityController = new ImportUnityController(importUnityUseCase);
+export default () => {
+    const unityRepository = new UnityRepository();
+    const importUnityUseCase = new ImportUnityUseCase(unityRepository);
+    const importUnityController = new ImportUnityController(importUnityUseCase);
 
-export { importUnityController };
+    return importUnityController;
+};

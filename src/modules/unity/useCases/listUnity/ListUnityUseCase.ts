@@ -1,11 +1,17 @@
-import { Unity } from "../../model/Unity";
+import { inject, injectable } from "tsyringe";
+
+import { Unity } from "../../entities/Unity";
 import { IUnityRepository } from "../../repositories/IUnityRepository";
 
+@injectable()
 class ListUnityUseCase {
-    constructor(private unityRepository: IUnityRepository) {}
+    constructor(
+        @inject("UnityRepository")
+        private unityRepository: IUnityRepository
+    ) {}
 
-    execute(): Unity[] {
-        const categories = this.unityRepository.list();
+    async execute(): Promise<Unity[]> {
+        const categories = await this.unityRepository.list();
 
         return categories;
     }

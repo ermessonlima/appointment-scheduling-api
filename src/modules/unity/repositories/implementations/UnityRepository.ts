@@ -1,46 +1,54 @@
-import { Unity } from "../../model/Unity";
+import { getRepository, Repository } from "typeorm";
+
+import { Unity } from "../../entities/Unity";
 import { IUnityCreateDTO } from "../dto/Unity.dto";
 import { IUnityRepository } from "../IUnityRepository";
 
 class UnityRepository implements IUnityRepository {
-    private unitys: Unity[] = [];
+    private repository: Repository<Unity>;
 
-    private static INSTANCE: UnityRepository;
+    // private static INSTANCE: UnityRepository;
 
-    private constructor() {
-        this.unitys = [];
+    constructor() {
+        this.repository = getRepository(Unity);
     }
 
-    public static getInstance(): UnityRepository {
-        if (!UnityRepository.INSTANCE) {
-            UnityRepository.INSTANCE = new UnityRepository();
-        }
+    // public static getInstance(): UnityRepository {
+    //     if (!UnityRepository.INSTANCE) {
+    //         UnityRepository.INSTANCE = new UnityRepository();
+    //     }
 
-        return UnityRepository.INSTANCE;
-    }
+    //     return UnityRepository.INSTANCE;
+    // }
 
-    create({ name, email, status, unityCode }: IUnityCreateDTO): Unity {
-        const unity: Unity = new Unity();
-
-        Object.assign(unity, {
+    async create({
+        name,
+        email,
+        status,
+        unityCode,
+    }: IUnityCreateDTO): Promise<Unity> {
+        const unity: Unity = this.repository.create({
             name,
             email,
             status,
             unityCode,
-            created_at: new Date(),
         });
 
-        this.unitys.push(unity);
+        this.repository.save(unity);
 
         return unity;
     }
 
-    list(): Unity[] {
-        return this.unitys;
+    async list(): Promise<Unity[]> {
+        const unitys = await this.repository.find();
+
+        return unitys;
     }
 
-    findByName(name: string): Unity {
-        const unity = this.unitys.find((unity) => unity.name === name);
+    async findByName(name: string): Promise<Unity> {
+        const unity = await this.repository.findOne({
+            name,
+        });
 
         return unity;
     }

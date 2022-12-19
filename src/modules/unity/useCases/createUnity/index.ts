@@ -1,11 +1,13 @@
-import { UnityRepository } from "../../repositories/implementations/UnityRepository";
-import { CreateUnityController } from "./CreateUnityController";
-import { CreateUnityUseCase } from "./CreateUnityUseCase";
+// import { UnityRepository } from "../../repositories/implementations/UnityRepository";
+// import { CreateUnityController } from "./CreateUnityController";
+// import { CreateUnityUseCase } from "./CreateUnityUseCase";
 
-const unityRepository = UnityRepository.getInstance();
+// export default () => {
+//     const unityRepository = new UnityRepository();
 
-const createUnityUseCase = new CreateUnityUseCase(unityRepository);
+//     const createUnityUseCase = new CreateUnityUseCase(unityRepository);
 
-const createUnityController = new CreateUnityController(createUnityUseCase);
+//     const createUnityController = new CreateUnityController(createUnityUseCase);
 
-export { createUnityController };
+//     return createUnityController;
+// };

@@ -1,4 +1,6 @@
-import { UnityRepository } from "../../repositories/implementations/UnityRepository";
+import { inject, injectable } from "tsyringe";
+
+import { IUnityRepository } from "../../repositories/IUnityRepository";
 
 interface IRequest {
     name: string;
@@ -7,11 +9,15 @@ interface IRequest {
     unityCode?: string;
 }
 
+@injectable()
 class CreateUnityUseCase {
-    constructor(private unityRepository: UnityRepository) {}
+    constructor(
+        @inject("UnityRepository")
+        private unityRepository: IUnityRepository
+    ) {}
 
-    execute({ name, email, status, unityCode }: IRequest): void {
-        const unityAlreadyExists = this.unityRepository.findByName(name);
+    async execute({ name, email, status, unityCode }: IRequest): Promise<void> {
+        const unityAlreadyExists = await this.unityRepository.findByName(name);
 
         if (unityAlreadyExists) {
             throw new Error("Unity already exists!");

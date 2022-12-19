@@ -1,4 +1,4 @@
-import { Manager } from "../../model/Manager";
+import { Manager } from "../../entities/Manager";
 import { IManagerRepository } from "../../repositories/IManagerRepository";
 
 class ListManagerUseCase {

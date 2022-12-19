@@ -1,0 +1,75 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Agendamento de Consultas - Documentação da API",
+        "version": "1.0.0",
+        "contato":{
+            "name": "Ermesson Lima",
+            "email": "ermessonlimadossantos@hotmail.com"
+        }
+    },
+    "paths": {
+        "/unity": {
+            "post": {
+                "tags": [
+                    "Unidade"
+                ],
+                "summary": "Cadastrar uma unidade",
+                "description": "Cadastrar uma nova unidade",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "unityCode": {
+                                        "type": "string"
+                                    } 
+                                },
+                                "example": {
+                                    "name": "Unidade 1",
+                                    "email": "ermessonlimadossantos@hotmail.com",
+                                    "status": "active",
+                                    "unityCode": "UNI1" 
+                            }
+                        }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Unidade cadastrada com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro ao cadastrar a unidade"
+                    }
+                
+                }
+            },
+            "get": {
+                "tags": [
+                    "Unidade"
+                ],
+                "summary": "Listar todas as unidades",
+                "description": "Listar todas as unidades cadastradas",
+                "responses": {
+                    "200": {
+                        "description": "Lista de unidades cadastradas"
+                    },
+                    "400": {
+                        "description": "Erro ao listar as unidades"
+                    }
+                }
+            }
+        }
+    }
+}

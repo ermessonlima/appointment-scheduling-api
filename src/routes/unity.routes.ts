@@ -1,9 +1,9 @@
 import { Router } from "express";
 import multer from "multer";
 
-import { createUnityController } from "../modules/unity/useCases/createUnity";
-import { importUnityController } from "../modules/unity/useCases/importUnity";
-import { listUnityController } from "../modules/unity/useCases/listUnity";
+import { CreateUnityController } from "../modules/unity/useCases/createUnity/CreateUnityController";
+import importUnityController from "../modules/unity/useCases/importUnity";
+import { ListUnityController } from "../modules/unity/useCases/listUnity/ListUnityController";
 
 const unityRoutes = Router();
 
@@ -11,16 +11,15 @@ const upload = multer({
     dest: "./tmp",
 });
 
-unityRoutes.post("/", (req, res) => {
-    return createUnityController.handle(req, res);
-});
+const createUnityController = new CreateUnityController();
+const listUnityController = new ListUnityController();
 
-unityRoutes.get("/", (req, res) => {
-    return listUnityController.handle(req, res);
-});
+unityRoutes.post("/", createUnityController.handle);
+
+unityRoutes.get("/", listUnityController.handle);
 
 unityRoutes.post("/import", upload.single("file"), (req, res) => {
-    return importUnityController.handle(req, res);
+    return importUnityController().handle(req, res);
 });
 
 export { unityRoutes };

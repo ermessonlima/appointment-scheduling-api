@@ -1,4 +1,4 @@
-import { Manager } from "../../model/Manager";
+import { Manager } from "../../entities/Manager";
 import { IManagerCreateDTO } from "../dto/Manager.dto";
 import { IManagerRepository } from "../IManagerRepository";
 
