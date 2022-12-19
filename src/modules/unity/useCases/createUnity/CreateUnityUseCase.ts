@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "../../../../errors/AppError";
 import { IUnityRepository } from "../../repositories/IUnityRepository";
 
 interface IRequest {
@@ -20,7 +21,7 @@ class CreateUnityUseCase {
         const unityAlreadyExists = await this.unityRepository.findByName(name);
 
         if (unityAlreadyExists) {
-            throw new Error("Unity already exists!");
+            throw new AppError("Unity already exists!");
         }
 
         this.unityRepository.create({

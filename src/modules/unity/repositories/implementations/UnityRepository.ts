@@ -7,19 +7,9 @@ import { IUnityRepository } from "../IUnityRepository";
 class UnityRepository implements IUnityRepository {
     private repository: Repository<Unity>;
 
-    // private static INSTANCE: UnityRepository;
-
     constructor() {
         this.repository = getRepository(Unity);
     }
-
-    // public static getInstance(): UnityRepository {
-    //     if (!UnityRepository.INSTANCE) {
-    //         UnityRepository.INSTANCE = new UnityRepository();
-    //     }
-
-    //     return UnityRepository.INSTANCE;
-    // }
 
     async create({
         name,

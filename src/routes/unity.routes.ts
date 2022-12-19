@@ -1,6 +1,7 @@
 import { Router } from "express";
 import multer from "multer";
 
+import { ensureAuthentication } from "../middlewares/ensureAuthenticated";
 import { CreateUnityController } from "../modules/unity/useCases/createUnity/CreateUnityController";
 import importUnityController from "../modules/unity/useCases/importUnity";
 import { ListUnityController } from "../modules/unity/useCases/listUnity/ListUnityController";
@@ -14,6 +15,7 @@ const upload = multer({
 const createUnityController = new CreateUnityController();
 const listUnityController = new ListUnityController();
 
+unityRoutes.use(ensureAuthentication);
 unityRoutes.post("/", createUnityController.handle);
 
 unityRoutes.get("/", listUnityController.handle);

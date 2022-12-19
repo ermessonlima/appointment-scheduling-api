@@ -1,3 +1,4 @@
+import { AppError } from "../../../../errors/AppError";
 import { ManagerRepository } from "../../repositories/implementations/ManagerRepository";
 
 interface IRequest {
@@ -14,7 +15,7 @@ class CreateManagerUseCase {
         const managerAlreadyExists = this.managerRepository.findByName(name);
 
         if (managerAlreadyExists) {
-            throw new Error("Manager already exists!");
+            throw new AppError("Manager already exists!");
         }
 
         this.managerRepository.create({
